@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    background-color: white;
+    position:absolute;
+}
+
+.header {
+    display: flex;
+    width: 1840px;
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+    border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.navbar {
+    display: flex;
+    margin: 0 auto;
+    width: 1024px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home {
+    padding-right: 20px;
+}
+
+.home button {
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+    border: 0;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.menu {
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-end;
+    list-style: none;
+    padding-right: 530px;
+}
+
+.menu li {
+    padding: 8px 12px;
+}
+
+.login {
+    cursor: pointer;
+    padding: 7px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.section {
+    margin: 0 auto;
+    width: 1024px;
+    height: 842px;
+    box-sizing: border-box;
+    border-right: 1px solid rgb(235, 235, 235);
+    border-left: 1px solid rgb(235, 235, 235);
+}
