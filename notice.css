@@ -61,7 +61,26 @@ table {
     font-weight: 500;
     margin-left: 10px;
 }
-
+.search {
+    position: relative;
+    width: 130px;
+}
+  
+input {
+    width: 90px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 13px;
+}
+  
+img {
+    position : absolute;
+    width: 17px;
+    top: 7px;
+    right: 16px;
+    margin: 0;
+}
 .upload {
     padding-left: 26px;
     padding-top: 20px;
@@ -75,6 +94,6 @@ table {
     height: 25px;
     border-radius: 4px;
     border: 1px solid;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
 }
