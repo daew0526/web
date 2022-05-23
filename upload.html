@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>navbar</title>
+    <title>rankingUpload</title>
     <link rel="stylesheet" href="navbar.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 </head>
@@ -27,6 +27,19 @@
         </div>
     </div>
     <div class="section">
+    <link rel="stylesheet" href="upload.css">
+    <form>
+        <input class="input_field" type="text" required="반드시 입력해주세요." maxlength="30" placeholder="제목을 입력해주세요."><br>
+        <textarea class="textarea_field" maxlength="500" required="반드시 작성해주세요." placeholder="내용을 입력해주세요."></textarea><br>
+
+        <label class="input_file_button"  for="input_file">
+            이미지
+        </label>
+        <input id="input_file" type="file" required="#" >
+        
+        <button class="write_button">업로드</button>
+    </form>
+    
 
     </div>
 </body>

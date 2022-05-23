@@ -1,3 +1,16 @@
+.section {
+    margin: 0 auto;
+    width: 1024px;
+    height: 842px;
+    box-sizing: border-box;
+    border-right: 1px solid rgb(235, 235, 235);
+    border-left: 1px solid rgb(235, 235, 235);
+}
+
+.section form {
+    height: 100%;
+}
+
 .notice {
     display: grid;
     grid-template-columns: 200px 1fr;
@@ -20,35 +33,34 @@
     border-left: 1px solid rgb(235, 235, 235);
 }
 
-.list {
-    padding-top: 60px;
-    font-size: 13px;
+.list_head > div,
+.list_body .item > div {
+    display: inline-block;
+    font-size: 14px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.list .id {
+    width: 10%;
 }
 
-.table_list tr {
-    border-bottom: 1px solid rgb(235, 235, 235);
+.list .title {
+    width: 40%;
 }
 
-.table_list th {
-    border-bottom: 1px solid rgb(235, 235, 235);
-    padding-bottom: 15px;
+.list .user {
+    width: 10%;
 }
 
-.table_list td {
-    text-align: center;
-    padding: 7px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+.list .date {
+    width: 10%;
 }
 
-.table_list tbody tr td:nth-child(2) {
-    text-align: left;
-    width: 350px;
+.list .view {
+    width: 10%;
+}  
+
+.list .good {
+    width: 10%;
 }
 
 .page {

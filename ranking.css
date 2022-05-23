@@ -1,3 +1,16 @@
+.section {
+    margin: 0 auto;
+    width: 1024px;
+    height: 842px;
+    box-sizing: border-box;
+    border-right: 1px solid rgb(235, 235, 235);
+    border-left: 1px solid rgb(235, 235, 235);
+}
+
+.section form {
+    height: 100%;
+}
+
 .ranking {
     padding-top: 10px;
     padding-right: 20px;
@@ -31,16 +44,6 @@
     cursor: pointer;
 }
 
-.ranking_bar_upload {
-    font-size: 14px;
-    width: 45px;
-    height: 25px;
-    border-radius: 4px;
-    border: 1px solid;
-    background-color: rgb(255, 255, 255);
-    cursor: pointer;
-}
-
 .ranking_board {
     padding-top: 15px;
 }
@@ -66,7 +69,7 @@
 
 .ranking_board .list .thumbnail {
     width: 225px;
-    height: 225px;
+    height: 200px;
     border-radius: 7px;
 }
 
@@ -85,7 +88,24 @@
     position: relative;
     width: 130px;
 }
-  
+
+.upload {
+    padding-left: 26px;
+    padding-top: 20px;
+    text-align: center;
+    padding-right: 20px;
+}
+
+.upload button {
+    font-size: 14px;
+    width: 45px;
+    height: 25px;
+    border-radius: 4px;
+    border: 1px solid;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
 input {
     width: 90px;
     border: 1px solid #bbb;
@@ -101,3 +121,64 @@ img {
     right: 16px;
     margin: 0;
 }
+
+
+nav { 
+    background: #636565; 
+    box-sizing: border-box; 
+    
+}
+
+nav a {
+    text-decoration: none;
+}
+
+
+
+nav ul {
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    
+}
+
+nav ul li {
+    display: inline-block;
+    position: relative;
+
+}
+
+nav ul li a {
+    color: rgb(237, 246, 246);
+    display: block;
+    font-size: 14px;
+    padding: 15px 14px;
+    transition: 0.3s linear;
+}
+
+nav ul li:hover { background: #363336; }
+
+nav ul li ul {
+    border-bottom: 5px solid #443b43;
+    display: none;
+    position: absolute;
+    width: 250px;
+}
+
+nav ul li ul li {
+    border-top: 1px solid #444;
+    display: block;
+}
+
+nav ul li ul li:first-child { border-top: none; }
+
+nav ul li ul li a {
+    background: #373737;
+    display: block;
+    padding: 10px 14px;
+}
+
+nav ul li ul li a:hover { background: #486878; }
+
+nav .fa.fa-angle-down { margin-left: 6px; }
+

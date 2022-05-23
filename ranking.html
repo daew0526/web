@@ -14,12 +14,12 @@
     <div class="header">
         <div class="navbar">
             <div class="home">
-                <button type="button" onclick="location.href='navbar.html';">Home</button>
+                <button type="button" onclick="location.href='home.html';">Home</button>
             </div>
             <div class="menu">
                 <li><a href="notice.html">community</a></li>
-                <li><a href="">ranking</a></li>
-                <li><a href="">interior</a></li>
+                <li><a href="ranking.html">ranking</a></li>
+                <li><a href="interior.html">interior</a></li>
             </div>
             <div class="login">
                 <a href="login.html">login</a>
@@ -30,11 +30,29 @@
         <link rel="stylesheet" href="ranking.css">
         <div class="ranking">
             <div class="ranking_bar">
-                <button type="button" class="ranking_bar_sort">정 렬</button>
-                <button type="button" class="ranking_bar_categori">카테고리</button>
-                <div>
-                    <button type="button" class="ranking_bar_upload">작성</button>
-                </div>
+
+                <nav>
+                    <div class="container">
+                        <ul>
+                            <li><a href="#">정렬<i class="fa fa-angle-down"></i></a>
+                                <ul>
+                                    <li><a href="#">최신순</a></li>
+                                    <li><a href="#">랭킹순</a></li>
+                                </ul>
+                            </li>
+                            <li class="sub-menu"><a href="#">Categories<i class='fa fa-angle-down'></i></a>
+                                <ul>
+                                    <li><a href="#">Category One</a></li>
+                                    <li><a href="#">Category Two</a></li>
+                                    <li><a href="#">Category Three</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav>
+
+
             </div>
             <div class="ranking_board">
                 <div class="list">
@@ -93,27 +111,42 @@
                     <div class="good">좋아요 32</div>
                     <div class="view">조회수 510</div>
                 </div>
-                </div>
-                <div class="page">
-                    <form class="form">
-                        <div class="search">
-                            <input type="text" placeholder="검색어 입력">
-                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-                        </div>
-                    </form>
-                    <a href=""><<</a>
-                    <a href=""><</a>
-                    <a href="">1</a>
-                    <a href="">2</a>
-                    <a href="">3</a>
-                    <a href="">4</a>
-                    <a href="">5</a>
-                    <a href="">></a>
-                    <a href="">>></a>
-                </div>
+            </div>
+
+            <div class="page">
+                <form class="form">
+                    <div class="search">
+                        <input type="text" placeholder="검색어 입력">
+                        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                    </div>
+                </form>
+                <a href=""><<</a>
+                <a href=""><<</a>
+                <a href="">1</a>
+                <a href="">2</a>
+                <a href="">3</a>
+                <a href="">4</a>
+                <a href="">5</a>
+                <a href="">></a>
+                <a href="">>></a>
+            </div>
+            <div class="upload">
+                <button type="button" onclick="location.href='upload.html';">작성</button>
             </div>
         </div>
     </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        $('nav li').hover(
+            function () {
+                $('ul', this).stop().slideDown(200);
+            },
+            function () {
+                $('ul', this).stop().slideUp(200);
+            }
+        );
+    </script>
 </body>
 
 </html>

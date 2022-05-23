@@ -1,0 +1,55 @@
+.section {
+    margin: 0 auto;
+    width: 1024px;
+    height: 842px;
+    box-sizing: border-box;
+    border-right: 1px solid rgb(235, 235, 235);
+    border-left: 1px solid rgb(235, 235, 235);
+}
+
+.section form {
+    height: 100%;
+    padding: 10px;
+}
+
+.input_field {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 3px 0;
+    font-size: 20px;
+    width: 99%;
+    height: 4%;
+}
+
+.textarea_field {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 3px 0;
+    font-size: 20px;
+    width: 99%;
+    height: 70%;
+}
+
+#input_file {
+    display: none;
+}
+
+.input_file_button {
+    padding: 7px 18px;
+    background-color:#FF6600;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.write_button {
+    background-color: #374340;
+    border: 1px solid #323f6b;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
