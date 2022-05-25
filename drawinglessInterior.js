@@ -1,61 +1,113 @@
-var canvas = document. getElementById ( "canvas" );
-var context = canvas. getContext ( "2d" );
+var canvas = document.getElementById( "canvas" );
+var ctx = canvas.getContext("2d");
 
-context.lineWidth = 3; // 컨버스에 그리는 라인의 두께 설정
-context.strokeStyle = "#000";
-var drag = false ;
-canvas.addEventListener ( "mousedown" , function (me) {
-	mDown (me)}, false );
-canvas.addEventListener ( "mousemove" , function (me) {
-	mMove (me)}, false );
-canvas.addEventListener ( "mouseup" , function (me) {
-	mUp (me)}, false );
-canvas.addEventListener ( "mouseout" , function (me) {
-	mOut (me)}, false );
+var arRectangle = new Array();
+var sx, sy;                  // 드래그 시작점
+var ex, ey;                  // 드래그 끝점
+var color;               // 현재 색상
+var drawing;                // 그리고 있는 중인가
+var moving = -1;              // 이동중인 도형 첨자
+// 사각형 생성자
 
-
-function mMove(me)
-{
-//drag가 false 일때는 return(return 아래는 실행 안함)
-	if (!drag)
-	{
-		return ;
+function Rectangle(sx, sy, ex, ey, color) {
+	this.sx = sx;
+	this.sy = sy;
+	this.ex = ex;
+	this.ey = ey;
+	this.color = color;
+}
+// x, y 위치의 사각형 찾음. 없으면 -1
+function getRectangle(x, y) {
+	for (var i = 0; i < arRectangle.length; i++) {
+		var rect = arRectangle[i];
+		if (x > rect.sx && x < rect.ex && y > rect.sy && y < rect.ey) {
+			return i;
+		}
 	}
-//마우스를 움직일 때마다 X좌표를 nowX에 담음
-	var nowX = me. offsetX ;
-//마우스를 움직일 때마다 Y좌표를 nowY에 담음
-	var nowY = me. offsetY ;
-//실질적으로 캔버스에 그림을 그리는 부분
-	canvasDraw (nowX,nowY);
-//마우스가 움직일때마다 X좌표를 stX에 담음
-	stX = nowX;
-//마우스가 움직일때마다 Y좌표를 stY에 담음
-	stY = nowY;
+	return -1;
+}
+// 화면 지우고 모든 도형을 순서대로 다 그림
+function drawRects() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	for (var i = 0; i < arRectangle.length; i++) {
+		var r = arRectangle[i];
+		ctx.fillStyle = r.color;
+		ctx.fillRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
+		ctx.strokeRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
+	}
 }
 
-function mDown(me)
-{
-	startX = me.offsetX;
-	startY = me.offsetY;
-	stX = me. offsetX ; //눌렀을 때 현재 마우스 X좌표를 stX에 담음
-	stY = me. offsetY ; //눌렀을 때 현재 마우스 Y좌표를 stY에 담음
-	drag = true ; //그림 그리기는 그리는 상태로 변경
+window.onload = function () {
+	canvas = document.getElementById("canvas");
+	if (canvas == null || canvas.getContext == null) return;
+	ctx = canvas.getContext("2d");
+	ctx.strokeStyle = "black";
+	ctx.lineWidth = 2;
+	color = "rgba(255, 255, 255, 0)"
+	ctx.fillStyle = color;
+	canvas.onmousedown = function (e) {
+		e.preventDefault();
+		// 클릭한 좌표 구하고 그 위치에 도형이 있는지 조사
+		sx = canvasX(e.clientX);
+		sy = canvasY(e.clientY);
+		moving = getRectangle(sx, sy);
+		// 도형을 클릭한 것이 아니면 그리기 시작
+		if (moving == -1) {
+			drawing = true;
+		}
+	}
+	canvas.onmousemove = function (e) {
+		e.preventDefault();
+		ex = canvasX(e.clientX);
+		ey = canvasY(e.clientY);
+		// 화면 다시 그리고 현재 도형 그림
+		if (drawing) {
+			drawRects();
+			ctx.fillStyle = color;
+			ctx.fillRect(sx, sy, ex - sx, ey - sy);
+			ctx.strokeRect(sx, sy, ex - sx, ey - sy);
+		}
+		// 상대적인 마우스 이동 거리만큼 도형 이동
+		if (moving != -1) {
+			var r = arRectangle[moving];
+			r.sx += (ex - sx);
+			r.sy += (ey - sy);
+			r.ex += (ex - sx);
+			r.ey += (ey - sy);
+			sx = ex;
+			sy = ey;
+			drawRects();
+		}
+	}
+	canvas.onmouseup = function (e) {
+		// 좌표 정규화해서 새로운 도형을 배열에 추가
+		if (drawing) {
+			var x1 = Math.min(sx, ex);
+			var y1 = Math.min(sy, ey);
+			var x2 = Math.max(sx, ex);
+			var y2 = Math.max(sy, ey);
+			arRectangle.push(new Rectangle(x1, y1, x2, y2, color));
+		}
+		drawing = false;
+		moving = -1;
+	}
 }
-
-function mUp(me)
-{
-	endX = me.offsetX
-	endY = me.offsetY
-	// context.strokeRect(startX,startY,endX-startX,endY-startY)
-	drag = false ; //마우스를 떼었을 때 그리기 중지
+var selcolor = document.getElementById("selcolor");
+selcolor.onchange = function (e) {
+	color = selcolor.value;
 }
-function mOut(me)
-{
-	drag = false ; //마우스가 캔버스 밖으로 벗어났을 때 그리기 중지
+var btnclear = document.getElementById("clear");
+btnclear.onclick = function (e) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	arRectangle.length = 0;
 }
-
-function canvasDraw(currentX,currentY)
-{
- context.clearRect(0,0,context.canvas.width,context.canvas.height) //설정된 영역만큼 캔버스에서 지움
- context.strokeRect(startX,startY,currentX-startX,currentY-startY) //시작점과 끝점의 좌표 정보로 사각형을 그려준다.
+function canvasX(clientX) {
+	var bound = canvas.getBoundingClientRect();
+	var bw = 5;
+	return (clientX - bound.left - bw) * (canvas.width / (bound.width - bw * 2));
+}
+function canvasY(clientY) {
+	var bound = canvas.getBoundingClientRect();
+	var bw = 5;
+	return (clientY - bound.top - bw) * (canvas.height / (bound.height - bw * 2));
 }

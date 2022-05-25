@@ -1,11 +1,11 @@
-let canvas = document.getElementById('canvas');
-let ctx = canvas.getContext('2d');
+var canvas = document.getElementById('canvas1');
+var ctx = canvas.getContext('2d');
 //격자무늬
-for ( let x = 0.5; x < 1301; x += 20 ) {				
+for ( var x = 0.5; x < 1301; x += 10 ) {				
 	ctx.moveTo(x, 0);
-	ctx.lineTo(x, 1300);
+	ctx.lineTo(x, 800);
 }
-for ( let y = 0.5; y < 801; y += 20 ) {
+for ( var y = 0.5; y < 801; y += 10 ) {
 	ctx.moveTo(0, y);
 	ctx.lineTo(1300, y);
 }
