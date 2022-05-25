@@ -1,16 +1,3 @@
-.section {
-    margin: 0 auto;
-    width: 1024px;
-    height: 842px;
-    box-sizing: border-box;
-    border-right: 1px solid rgb(235, 235, 235);
-    border-left: 1px solid rgb(235, 235, 235);
-}
-
-.section form {
-    height: 100%;
-}
-
 .ranking {
     padding-top: 10px;
     padding-right: 20px;

@@ -1,0 +1,53 @@
+.drawingless {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.function {
+    border-right: 1px solid rgb(235, 235, 235);
+    text-align: center;
+}
+
+.function_Square {
+    margin-top: 100px;
+}
+
+.function_Square button {
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.board {
+    display: grid;
+    grid-template-rows: 100px 1fr;
+}
+
+
+.board_canvas {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.board_button {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 10px;
+    padding-right: 170px;
+}
+
+.board_button button {
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.save {
+    padding-right: 25px;
+}

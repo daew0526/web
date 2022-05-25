@@ -1,0 +1,45 @@
+.view {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.view_board {
+    width: 650px;
+    height: 650px;
+    background-color: gray;
+}
+
+.view_button {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+.edit {
+    padding: 5px;
+}
+
+.edit button{
+    font-size: 15px;
+    width: 70px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.delete {
+    padding: 5px;
+}
+
+.delete button{
+    font-size: 15px;
+    width: 70px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
