@@ -1,19 +1,46 @@
+.section1 {
+    display: grid;
+    position: relative;
+    width: 1920px;
+    margin: 0 auto;
+}
+
 .drawingless {
     display: grid;
+    text-align: center;
     grid-template-columns: 300px 1fr;
 }
 
 .function {
+    display: flex;
+    flex-direction: column;
     border-right: 1px solid rgb(235, 235, 235);
-    text-align: center;
+    align-items: center;
 }
 
-.function_Square {
+.function_square {
+    display: flex;
+    flex-direction: column;
     margin-top: 100px;
     padding: 5px;
 }
 
-.function_Square button {
+.function_square button {
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.function_straight {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.function_straight button {
     width: 80px;
     height: 40px;
     border-radius: 4px;
