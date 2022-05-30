@@ -1,53 +1,42 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const colors = document.getElementById("selcolors");
-const smode = document.getElementById("jsSquare");
-const stmode = document.getElementById("jsStraight");
+const sqmode = document.getElementById("jsSquare");
 const scmode = document.getElementById("jsCircle");
+const stmode = document.getElementById("jsStraight");
+const sqEraser = document.getElementById("squareEraser");
+const scEraser = document.getElementById("circleEraser");
+const stEraser = document.getElementById("straightEraser");
 
 let arSquare = new Array();  //사각형 배열
 let arStraight = new Array();// 직선 배열
 let arCircle = new Array();  // 원 배열
+
 let sx, sy;                  // 드래그 시작점
 let ex, ey;                  // 드래그 끝점
 let color;                   // 현재 색상
-
 let moving = -1;             // 이동중인 도형 첨자
-
 let backup;
 
 let squaredrawing;           // 그리고 있는 중인가
-let straightdrawing;
 let circledrawing;
+let straightdrawing;
 
-let s = false;			 	//사각형
+let sq = false;			 	//사각형
 let st = false;				//직선
 let sc = false;				//원
-//버튼
-function sModeClick() {
-	if (s === true) {
-		s = false;
-		smode.innerText = "사각형";
-	} else {
-		s = true;
-		st = false;
-		sc = false;
-		smode.innerText = "사각형중";
-		stmode.innerText = "직선";
-		scmode.innerText = "원";
-	}
-}
 
-function stModeClick() {
-	if (st === true) {
-		st = false;
-		stmode.innerText = "직선";
+//버튼
+function sqModeClick() {
+	if (sq === true) {
+		sq = false;
+		sqmode.innerText = "사각형";
 	} else {
-		st = true;
-		s = false;
+		sq = true;
+		st = false;
 		sc = false;
-		stmode.innerText = "직선중";
-		smode.innerText = "사각형";
+		sqmode.innerText = "사각형중";
+		stmode.innerText = "직선";
 		scmode.innerText = "원";
 	}
 }
@@ -59,22 +48,41 @@ function scModeClick() {
 	} else {
 		sc = true;
 		st = false;
-		s = false;
+		sq = false;
 		scmode.innerText = "원중";
 		stmode.innerText = "직선";
-		smode.innerText = "사각형";
+		sqmode.innerText = "사각형";
 	}
+}
+
+function stModeClick() {
+	if (st === true) {
+		st = false;
+		stmode.innerText = "직선";
+	} else {
+		st = true;
+		sq = false;
+		sc = false;
+		stmode.innerText = "직선중";
+		sqmode.innerText = "사각형";
+		scmode.innerText = "원";
+	}
+}
+//되돌리기 버튼
+function sqEraserClick() {
+	arSquare.pop();
+	drawRects();
+}
+function stEraserClick() {
+	arStraight.pop();
+	drawRects();
+}
+function scEraserClick() {
+	arCircle.pop();
+	drawRects();
 }
 //사각형 생성자
 function Square(sx, sy, ex, ey, color) {
-	this.sx = sx;
-	this.sy = sy;
-	this.ex = ex;
-	this.ey = ey;
-	this.color = color;
-}
-//직선 생성자
-function Straight(sx, sy, ex, ey, color) {
 	this.sx = sx;
 	this.sy = sy;
 	this.ex = ex;
@@ -89,18 +97,18 @@ function Circle(sx, sy, ex, ey, color) {
 	this.ey = ey;
 	this.color = color;
 }
+//직선 생성자
+function Straight(sx, sy, ex, ey, color) {
+	this.sx = sx;
+	this.sy = sy;
+	this.ex = ex;
+	this.ey = ey;
+	this.color = color;
+}
 // x, y 위치의 사각형 찾음. 없으면 -1
 function getSquare(x, y) {
 	for (let i = 0; i < arSquare.length; i++) {
 		let rect = arSquare[i];
-		if (x > rect.sx && x < rect.ex && y > rect.sy && y < rect.ey) {
-			return i;
-		}
-	}
-	return -1;
-}function getCircle(x, y) {
-	for (let i = 0; i < arCircle.length; i++) {
-		let rect = arCircle[i];
 		if (x > rect.sx && x < rect.ex && y > rect.sy && y < rect.ey) {
 			return i;
 		}
@@ -150,7 +158,7 @@ canvas.onmousedown = function (e) {
 	sx = canvasX(e.clientX);
 	sy = canvasY(e.clientY);
 	// 도형을 클릭한 것이 아니면 그리기 시작
-	if (s == true) {
+	if (sq == true) {
 		if (moving == -1) {
 			moving = getSquare(sx, sy);
 			squaredrawing = true;
@@ -161,10 +169,7 @@ canvas.onmousedown = function (e) {
 		straightdrawing = true;
 	}
 	if (sc == true) {
-		if (moving == -1) {
-			moving = getCircle(sx, sy);
 			circledrawing = true;
-		}
 	}
 }
 
@@ -205,7 +210,6 @@ canvas.onmousemove = function (e) {
 	// 상대적인 마우스 이동 거리만큼 도형 이동
 	if (moving != -1) {
 		let r = arSquare[moving];
-		r = arCircle[moving];
 		r.sx += (ex - sx);
 		r.sy += (ey - sy);
 		r.ex += (ex - sx);
@@ -236,7 +240,7 @@ canvas.onmouseup = function (e) {
 		let x1 = sx;
 		let y1 = sy;
 		let x2 = ex;
-		let y2 = ey;s
+		let y2 = ey;
 		arCircle.push(new Circle(x1, y1, x2, y2, color));
 	}
 	squaredrawing = false;
@@ -269,14 +273,26 @@ selcolor.onchange = function(e) {
 	color = selcolor.value;
 }
 
-if (smode) {
-	smode.addEventListener("click", sModeClick);
+if (sqmode) {
+	sqmode.addEventListener("click", sqModeClick);
+}
+
+if (scmode) {
+	scmode.addEventListener("click", scModeClick);
 }
 
 if (stmode) {
 	stmode.addEventListener("click", stModeClick);
 }
 
-if (scmode) {
-	scmode.addEventListener("click", scModeClick);
+if (sqEraser) {
+	sqEraser.addEventListener("click", sqEraserClick);
+}
+
+if (scEraser) {
+	scEraser.addEventListener("click", scEraserClick);
+}
+
+if (stEraser) {
+	stEraser.addEventListener("click", stEraserClick);
 }

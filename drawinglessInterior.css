@@ -19,8 +19,6 @@
 }
 
 .function_square {
-    display: flex;
-    flex-direction: column;
     margin-top: 100px;
     padding: 0px;
 }
@@ -34,9 +32,14 @@
     cursor: pointer;
 }
 
+.function_square #squareEraser{
+    width: 40px;
+    height: 30px;
+    font-size: 10px;;
+    text-align: center;
+}
+
 .function_circle {
-    display: flex;
-    flex-direction: column;
     padding: 10px;
 }
 
@@ -49,10 +52,18 @@
     cursor: pointer;
 }
 
-.function_circle {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
+.function_circle #circleEraser{
+    width: 40px;
+    height: 30px;
+    font-size: 10px;;
+    text-align: center;
+}
+
+.function_straight #straightEraser{
+    width: 40px;
+    height: 30px;
+    font-size: 10px;;
+    text-align: center;
 }
 
 .function_straight button {
