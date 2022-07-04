@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>drawinglessInterior</title>
     <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="calculator.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 </head>
 
@@ -30,6 +31,11 @@
     <link rel="stylesheet" href="drawinglessInterior.css">
         <div class="drawingless">
             <div class="function">
+                <div class="function_floor">
+                    <button id="jsFloor">바닥</button>
+                    <button id="floorEraser">undo</button>
+                </div>
+                
                 <div class="function_square">
                     <button id="jsSquare">사각형</button>
                     <button id="squareEraser">undo</button>
@@ -42,8 +48,17 @@
                     <button id="jsStraight">직선</button>
                     <button id="straightEraser">undo</button>
                 </div>
-                <select id="selcolor">
-                    <option value="rgba(255,255,255)">도형색상</option>
+                <div class="function_text">
+                    <button id="jsText">텍스트</button>
+                    <button id="textEraser">undo</button>
+                </div>
+                <select id="selfloor"> 
+                    <option value="">바닥</option>
+                    <option value="1">장판</option>
+                    <option value="2">대리석</option>
+                </select>
+                <select id="selcolor"> 
+                    <option value="">도형색상</option>
                     <option value="rgba(255,255,255)">하양</option>
                     <option value="rgba(0,0,0)">검정</option>
                     <option value="rgba(255,0,0)">빨강</option>
@@ -57,6 +72,38 @@
                 <div class="function_reset">
                 <input type="button" id="clear" value="초기화">
                 </div>
+                <div class="calculator">
+                    <section id="caculator">
+                        <article id="area-display">
+                            <div id="steps" class="off">0</div>
+                            <div id="display">0</div>
+                        </article>
+                        <article id="area-btn">
+                            <div class="nums">
+                                <button class="num" data-val="7">7</button> 
+                                <button class="num"data-val="8">8</button> 
+                                <button class="num"data-val="9">9</button>
+                                <button class="num" data-val="4">4</button> 
+                                <button class="num"data-val="5">5</button> 
+                                <button class="num"data-val="6">6</button>
+                                <button class="num" data-val="1">1</button> 
+                                <button class="num"data-val="2">2</button> 
+                                <button class="num"data-val="3">3</button>
+                                <button class="num" data-val="-1">+/-</button> 
+                                <button class="num" data-val="0">0</button> 
+                                <button class="num"data-val=".">.</button>
+                                <button id="btn_result">=</button>
+                            </div>
+                            <div class="ops">
+                                <button id="reset">C</button>
+                                <button class="op" data-val="/">÷</button>
+                                <button class="op" data-val="*">×</button>
+                                <button class="op" data-val="-">-</button>
+                                <button class="op" data-val="+">+</button>
+                            </div>
+                        </article>
+                    </section>
+                </div>
             </div>
             <div class="board">
                 <div class="board_button">
@@ -68,14 +115,18 @@
                     </div>
                 </div>
 
-                <div class="board_canvas">
-                    <canvas id = "canvas" width = "1300" height = "801" style =' border : 1px solid #000 '; ></canvas>
+                <div id="board_canvas">
+                    <canvas id = "canvas" width = "1300" height = "801"></canvas>
+                    <canvas id = "bg" width = "1300" height = "801"></canvas>
+                    <canvas id = "txt" width = "1300" height = "801"></canvas>
+                    <canvas id = "floor" width = "1300" height = "801"></canvas>
                 </div>
 
             </div>
         </div>
     </div>
         <script src="drawinglessInterior.js"></script>
+        <script src="calculator.js"></script>
 </body>
 
 </html>

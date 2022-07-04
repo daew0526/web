@@ -3,7 +3,7 @@
   margin: auto;
 }
 
-.form {
+.loginbox {
   text-decoration-line: none;
   background: #FFFFFF;
   width: 310px;
@@ -64,3 +64,35 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.btn-social-login1 {
+  text-decoration: none;
+  color: inherit;
+  transition: all .2s;
+  outline: 0;
+  border: 1px solid transparent;
+  padding: .5rem !important;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #24292E;
+  cursor: pointer;
+}
+
+.btn-social-login2 {
+  text-decoration: none;
+  color: inherit;
+  transition: all .2s;
+  outline: 0;
+  border: 1px solid transparent;
+  padding: .5rem !important;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #FFEB00;
+  cursor: pointer;
+}
+
+.btn-social-login:focus {
+  box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+}
+
+.text-dark { color: #343a40!important; }

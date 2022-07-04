@@ -6,26 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
-    <link rel="stylesheet" href="login.css" ) <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 </head>
 
 <body>
     <div class="login">
-        <form class="form">
-            <div class="home">
-                <button type="button" onclick="location.href='home.html';">Home</button>
-            </div>
-            <input type="text" placeholder="username" />
-            <br>
-            <input type="password" placeholder="password" />
-            <br>
-            <button>login</button>
-            <div class="text">
-                <a href="signUp.html" styletype>회원가입</a>
+        <div class="loginbox">
+            <form class="form">
+                <div class="home">
+                    <button type="button" onclick="location.href='home.html';">Home</button>
+                </div>
+                <input type="text" name="id" placeholder="username" />
                 <br>
-                <a href="#" styletype>비밀번호 재설정</a>
+                <input type="password" name="password" placeholder="password" />
+                <br>
+                <button>login</button>
+                <div class="text">
+                    <a href="signUp.html" styletype>회원가입</a>
+                    <br>
+                    <a href="#" styletype>비밀번호 재설정</a>
+                </div>
+            </form>
+            <div class="icon">
+                <br><br>
+                <button class="btn-social-login1" onclick="location.href='/user/github/start';"><i class="xi-2x xi-github"></i></button>
+                <button class="btn-social-login2" onclick="location.href='/user/kakao/start';"><i class="xi-2x xi-kakaotalk text-dark"></i></button>
             </div>
-        </form>
+        </div>
     </div>
 </body>
 

@@ -18,8 +18,28 @@
     align-items: center;
 }
 
-.function_square {
+.function_floor {
     margin-top: 100px;
+    padding: 10px;
+}
+
+.function_floor #floorEraser {
+    width: 40px;
+    height: 30px;
+    font-size: 10px;
+    text-align: center;
+}
+
+.function_floor button {
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.function_square {
     padding: 0px;
 }
 
@@ -32,10 +52,11 @@
     cursor: pointer;
 }
 
-.function_square #squareEraser{
+.function_square #squareEraser {
     width: 40px;
     height: 30px;
-    font-size: 10px;;
+    font-size: 10px;
+    ;
     text-align: center;
 }
 
@@ -52,17 +73,19 @@
     cursor: pointer;
 }
 
-.function_circle #circleEraser{
+.function_circle #circleEraser {
     width: 40px;
     height: 30px;
-    font-size: 10px;;
+    font-size: 10px;
+    ;
     text-align: center;
 }
 
-.function_straight #straightEraser{
+.function_straight #straightEraser {
     width: 40px;
     height: 30px;
-    font-size: 10px;;
+    font-size: 10px;
+    ;
     text-align: center;
 }
 
@@ -73,6 +96,37 @@
     border: 1px solid;
     background-color: rgb(255, 255, 255);
     cursor: pointer;
+}
+
+.function_text {
+    padding: 10px;
+}
+
+.function_text #textEraser {
+    width: 40px;
+    height: 30px;
+    font-size: 10px;
+    ;
+    text-align: center;
+}
+
+.function_text button {
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+#selfloor {
+    width: 80px;
+    height: 20px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid;
 }
 
 #selcolor {
@@ -103,10 +157,23 @@
     grid-template-rows: 100px 1fr;
 }
 
+canvas {
+    position: absolute;
+    border: 1px solid #000;
+}
 
-.board_canvas {
+#board_canvas {
+    padding-right: 1320px;
     padding-top: 10px;
     text-align: center;
+}
+
+#canvas {
+    z-index: 1;
+}
+
+#bg {
+    z-index: 0;
 }
 
 .board_button {
@@ -128,3 +195,4 @@
 .save {
     padding-right: 25px;
 }
+
