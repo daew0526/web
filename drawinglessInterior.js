@@ -1,7 +1,8 @@
 const ctx = document.getElementById("canvas").getContext("2d");
 const ctx1 = document.getElementById("bg").getContext("2d");
 const ctx2 = document.getElementById("txt").getContext("2d");
-const ctx3 = document.getElementById("floor").getContext("2d");
+const ctx3 = document.getElementById("floor1").getContext("2d");
+const ctx4 = document.getElementById("floor2").getContext("2d");
 const colors = document.getElementById("selcolors");
 const flmode = document.getElementById("jsFloor");
 const sqmode = document.getElementById("jsSquare");
@@ -40,15 +41,19 @@ let st = false;				//직선
 let sc = false;				//원
 let tx = false;				//텍스트
 
+//세팅
 ctx.strokeStyle = "black";
 ctx.lineWidth = 4;
 color = "rgb(255, 255, 255)"
 ctx.fillStyle = color;
 
 ctx3.strokeStyle = "black";
-ctx3.lineWidth = 4;
-floor = 1;
+ctx4.strokeStyle = "black";
+ctx3.lineWidth = 0;
+ctx4.lineWidth = 0;
+floor = "rgb(255, 255, 255)";
 ctx3.fillStyle = floor;
+ctx4.fillStyle = floor;
 
 bg();
 
@@ -215,16 +220,18 @@ function bg() {
 	ctx1.stroke();
 }
 //바닥
-function draw() {
+function draw1() {
 	let img = new Image();
-	if (floor == 1) {
-		img.src = "장판.jpg";
-	}
-	else if (floor == 2){
-		img.src = "대리석.jpg";
-	}
+	img.src = "장판.jpg";
 	img.onload = function () {
 		ctx3.fillStyle = ctx3.createPattern(img, "repeat");
+	}
+}
+function draw2() {
+	let img = new Image();
+	img.src = "대리석.jpg";
+	img.onload = function () {
+		ctx4.fillStyle = ctx4.createPattern(img, "repeat");
 	}
 }
 // 텍스트
@@ -306,12 +313,20 @@ function drawRects() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx2.clearRect(0, 0, canvas.width, canvas.height);
 	ctx3.clearRect(0, 0, canvas.width, canvas.height);
+	ctx4.clearRect(0, 0, canvas.width, canvas.height);
 	let i, r;
 	for (i = 0; i < arFloor.length; i++) {
 		r = arFloor[i];
-		draw();
-		ctx3.fillRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
-		ctx3.strokeRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
+		if (r.color == 1) {
+			draw1();
+			ctx3.fillRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
+			ctx3.strokeRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
+		}
+		else if (r.color == 2) {
+			draw2();
+			ctx4.fillRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
+			ctx4.strokeRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
+		}	
 	}
 	for (i = 0; i < arSquare.length; i++) {
 		r = arSquare[i];
@@ -386,9 +401,16 @@ canvas.onmousemove = function (e) {
 	// 화면 다시 그리고 현재 도형 그림
 	if (floordrawing) {
 		drawRects();
-		draw();
-		ctx3.fillRect(sx, sy, ex - sx, ey - sy);
-		ctx3.strokeRect(sx, sy, ex - sx, ey - sy);
+		if (floor == 1) {
+			draw1();
+			ctx3.fillRect(sx, sy, ex - sx, ey - sy);
+			ctx3.strokeRect(sx, sy, ex - sx, ey - sy);
+		}
+		else if (floor == 2) {
+			draw2();
+			ctx4.fillRect(sx, sy, ex - sx, ey - sy);
+			ctx4.strokeRect(sx, sy, ex - sx, ey - sy);
+		}
 		if (moving != -1) {
 			let r = arFloor[moving];
 			r.sx += (ex - sx);
@@ -495,6 +517,7 @@ let 초기화 = document.getElementById("clear");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx2.clearRect(0, 0, canvas.width, canvas.height);
 	ctx3.clearRect(0, 0, canvas.width, canvas.height);
+	ctx4.clearRect(0, 0, canvas.width, canvas.height);
 	arFloor.length = 0;
 	arSquare.length = 0;
 	arStraight.length = 0;
