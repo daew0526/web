@@ -1,3 +1,54 @@
+.home {
+    padding-right: 20px;
+}
+
+.home li {
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+    border: 0;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    list-style: none;
+}
+
+
+
+
+
+.outer {
+    border: 1px solid transparent;
+    width: 1019px;
+    height: 300px;
+    margin: 0 auto;
+    overflow-x: hidden;
+    
+  }
+  
+.inner-list {
+    display: flex;
+    transition: .3s ease-out;
+    height: 92%;
+}
+  
+.inner {
+    width: 100vw;
+    padding: 0 16px;
+}
+  
+.button-list {
+    text-align: center;
+    
+}
+
+button {
+    border: none;
+    background: none;
+    
+  
+}
+
+
+
 .ranking {
     padding-top: 10px;
     padding-right: 20px;
@@ -168,4 +219,9 @@ nav ul li ul li a {
 nav ul li ul li a:hover { background: #486878; }
 
 nav .fa.fa-angle-down { margin-left: 6px; }
+
+
+
+
+
 
