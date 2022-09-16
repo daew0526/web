@@ -122,6 +122,20 @@
     border-style: none;
 }
 
+.function_img #image2 {
+    margin: 10px;
+    width: 50px;
+    height: 40px;
+    border-style: none;
+}
+
+.function_img #image3 {
+    margin: 10px;
+    width: 50px;
+    height: 40px;
+    border-style: none;
+}
+
 .function_text {
     padding: 10px;
 }
@@ -130,7 +144,6 @@
     width: 40px;
     height: 30px;
     font-size: 10px;
-    ;
     text-align: center;
 }
 

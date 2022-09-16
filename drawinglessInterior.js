@@ -8,12 +8,15 @@ $(document).ready(function () {
 	})
 })
 
+//캔버스
 const ctx = document.getElementById("canvas").getContext("2d");
 const ctx1 = document.getElementById("bg").getContext("2d");
 const ctx2 = document.getElementById("txt").getContext("2d");
 const ctx3 = document.getElementById("floor1").getContext("2d");
 const ctx4 = document.getElementById("floor2").getContext("2d");
 const ctx5 = document.getElementById("img1").getContext("2d");
+
+//버튼
 const colors = document.getElementById("selcolors");
 const flmode = document.getElementById("jsFloor");
 const sqmode = document.getElementById("jsSquare");
@@ -21,13 +24,20 @@ const scmode = document.getElementById("jsCircle");
 const stmode = document.getElementById("jsStraight");
 const txmode = document.getElementById("jsText");
 const immode = document.getElementById("jsImg");
-const mvmode = document.getElementById("move"); //옮기기
+const mvmode = document.getElementById("move");
+
+//지우개
 const flEraser = document.getElementById("floorEraser");
 const sqEraser = document.getElementById("squareEraser");
 const scEraser = document.getElementById("circleEraser");
 const stEraser = document.getElementById("straightEraser");
 const txEraser = document.getElementById("textEraser");
 const imEraser = document.getElementById("imgEraser");
+
+//가구
+const list1 = document.getElementById("image1");
+const list2 = document.getElementById("image2");
+const list3 = document.getElementById("image3");
 
 //사각형 가로,세로
 const sqWidth = document.getElementById("squareWidth");
@@ -36,7 +46,6 @@ const squareX = document.getElementById("squareX");
 const squareY = document.getElementById("squareY");
 //원 
 const ccWidth = document.getElementById("circleWidth");
-const ccheight = document.getElementById("circleheight");
 const circleX = document.getElementById("circleX");
 const circleY = document.getElementById("circleY");
 //지우개
@@ -61,6 +70,7 @@ let floor;					 // 현재 바닥
 let color;                   // 현재 색상
 let moving = -1;             // 이동중인 도형 첨자
 let border;
+let listv;
 
 let floordrawing;			 // 그리고 있는 중인가
 let squaredrawing;
@@ -289,6 +299,16 @@ function eraserClick() {
 		reset.innerText = "지우개 중";
 	}
 }
+//가구
+function list1Click() {
+	listv = 1;
+}
+function list2Click() {
+	listv = 2;
+}
+function list3Click() {
+	listv = 3;
+}
 //되돌리기 버튼
 function flEraserClick() {
 	arFloor.pop();
@@ -357,12 +377,13 @@ function Text(txt, x, y) {
 	this.y = y;
 }
 //이미지 생성자
-function Img(img, sx, sy, ex, ey) {
+function Img(img, sx, sy, ex, ey, list) {
 	this.img = img;
 	this.sx = sx;
 	this.sy = sy;
 	this.ex = ex;
 	this.ey = ey;
+	this.list = list;
 }
 //격자무늬
 function bg() {
@@ -591,7 +612,7 @@ function drawRects() {
 	ctx4.clearRect(0, 0, canvas.width, canvas.height);
 	ctx5.clearRect(0, 0, canvas.width, canvas.height);
 	let i, r;
-	for (i = 0; i < arFloor.length; i++) {
+	for (i = arFloor.length - 1; i > -1; i--) {
 		r = arFloor[i];
 		ctx3.lineWidth = r.border;
 		ctx4.lineWidth = r.border;
@@ -606,14 +627,14 @@ function drawRects() {
 			ctx4.strokeRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
 		}
 	}
-	for (i = 0; i < arSquare.length; i++) {
+	for (i = arSquare.length - 1; i > -1; i--) {
 		r = arSquare[i];
 		ctx.lineWidth = r.border;
 		ctx.fillStyle = r.color;
 		ctx.fillRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
 		ctx.strokeRect(r.sx, r.sy, r.ex - r.sx, r.ey - r.sy);
 	}
-	for (i = 0; i < arCircle.length; i++) {
+	for (i = arCircle.length - 1; i > -1; i--) {
 		r = arCircle[i];
 		ctx.lineWidth = r.border;
 		ctx.beginPath();
@@ -627,7 +648,7 @@ function drawRects() {
 		ctx.fill();
 		ctx.stroke();
 	}
-	for (i = 0; i < arStraight.length; i++) {
+	for (i = arStraight.length - 1; i > -1; i--) {
 		r = arStraight[i];
 		ctx.lineWidth = r.border;
 		ctx.beginPath();
@@ -635,14 +656,14 @@ function drawRects() {
 		ctx.lineTo(r.ex, r.ey);
 		ctx.stroke();
 	}
-	for (i = 0; i < arText.length; i++) {
+	for (i = arText.length - 1; i > -1; i--) {
 		r = arText[i];
 		ctx2.textBaseline = 'top';
 		ctx2.textAlign = 'left';
 		ctx2.font = font;
 		ctx2.fillText(r.txt, r.x, r.y);
 	}
-	for (i = 0; i < arImg.length; i++) {
+	for (i = arImg.length - 1; i > -1; i--) {
 		r = arImg[i];
 		ctx5.drawImage(r.img, r.sx, r.sy);
 	}
@@ -682,20 +703,59 @@ canvas.onmousedown = function (e) {
 	if (imgdrawing) {
 		if (moving == -1) {
 			function draw3() {
-				let img = new Image();
-				img.src = "의자.jpg";
-				img.onload = function () {
+				let img1 = new Image();
+				img1.src = "의자.jpg";
+				img1.onload = function () {
 					e.preventDefault();
 					let sx = canvasX(e.clientX);
 					let sy = canvasY(e.clientY);
-					let ex = sx + img.width;
-					let ey = sy + img.height;
-					ctx5.drawImage(img, sx, sy);
-					arImg.push(new Img(img, sx, sy, ex, ey));
+					let ex = sx + img1.width;
+					let ey = sy + img1.height;
+					let list = listv;
+					ctx5.drawImage(img1, sx, sy);
+					arImg.push(new Img(img1, sx, sy, ex, ey, list));
 					console.log(arImg);
 				}
 			}
-			draw3();
+			function draw4() {
+				let img2 = new Image();
+				img2.src = "책상.jpg";
+				img2.onload = function () {
+					e.preventDefault();
+					let sx = canvasX(e.clientX);
+					let sy = canvasY(e.clientY);
+					let ex = sx + img2.width;
+					let ey = sy + img2.height;
+					let list = listv;
+					ctx5.drawImage(img2, sx, sy);
+					arImg.push(new Img(img2, sx, sy, ex, ey, list));
+					console.log(arImg);
+				}
+			}
+			function draw5() {
+				let img3 = new Image();
+				img3.src = "침대.jpg";
+				img3.onload = function () {
+					e.preventDefault();
+					let sx = canvasX(e.clientX);
+					let sy = canvasY(e.clientY);
+					let ex = sx + img3.width;
+					let ey = sy + img3.height;
+					let list = listv;
+					ctx5.drawImage(img3, sx, sy);
+					arImg.push(new Img(img3, sx, sy, ex, ey, list));
+					console.log(arImg);
+				}
+			}
+			if (listv == 1){
+				draw3();
+			}
+			if (listv == 2){
+				draw4();
+			}
+			if (listv == 3){
+				draw5();
+			}
 		}
 	}
 	if (mv) {
@@ -785,7 +845,6 @@ canvas.onmousemove = function (e) {
 				sy = ey;
 				drawRects();
 			}
-
 		}
 		if (move == 2) {
 			if (moving != -1) {
@@ -798,7 +857,6 @@ canvas.onmousemove = function (e) {
 				sy = ey;
 				drawRects();
 			}
-
 		}
 		if (move == 3) {
 			if (moving != -1) {
@@ -811,7 +869,6 @@ canvas.onmousemove = function (e) {
 				sy = ey;
 				drawRects();
 			}
-
 		}
 		if (move == 4) {
 			if (moving != -1) {
@@ -836,7 +893,7 @@ canvas.onmouseup = function (e) {
 		let x2 = Math.max(sx, ex);
 		let y2 = Math.max(sy, ey);
 		let border = lineWidth.value;
-		arFloor.push(new Floor(x1, y1, x2, y2, color, border));
+		arFloor.unshift(new Floor(x1, y1, x2, y2, color, border));
 		floordrawing = false;
 		console.log(arFloor);
 
@@ -847,7 +904,7 @@ canvas.onmouseup = function (e) {
 		let x2 = Math.max(sx, ex);
 		let y2 = Math.max(sy, ey);
 		let border = lineWidth.value;
-		arSquare.push(new Square(x1, y1, x2, y2, color, border));
+		arSquare.unshift(new Square(x1, y1, x2, y2, color, border));
 		squaredrawing = false;
 		console.log(arSquare);
 
@@ -858,7 +915,7 @@ canvas.onmouseup = function (e) {
 		let x2 = ex;
 		let y2 = ey;
 		let border = lineWidth.value;
-		arCircle.push(new Circle(x1, y1, x2, y2, color, border));
+		arCircle.unshift(new Circle(x1, y1, x2, y2, color, border));
 		circledrawing = false;
 		console.log(arCircle);
 
@@ -869,7 +926,7 @@ canvas.onmouseup = function (e) {
 		let x2 = ex;
 		let y2 = ey;
 		let border = lineWidth.value;
-		arStraight.push(new Straight(x1, y1, x2, y2, color, border));
+		arStraight.unshift(new Straight(x1, y1, x2, y2, color, border));
 		straightdrawing = false;
 
 	}
@@ -897,9 +954,6 @@ if (sqheight) {
 let 버튼 = document.getElementById("ok");
 버튼.onclick = function (event) {
 	event.preventDefault();
-	//ctx.fillStyle = color;
-	//ctx.fillRect(100, 100, sqw, sqh);
-	//ctx.strokeRect(100, 100, sqw, sqh);
 	arSquare.push(new Square(100, 100, parseInt(sqw) + 100, parseInt(sqh) + 100, color));
 	drawRects();
 }
@@ -915,7 +969,6 @@ if (ccWidth) {
 let 바튼 = document.getElementById("okay");
 바튼.onclick = function (event) {
 	event.preventDefault();
-
 	arCircle.push(new Circle(100, 100, parseInt(cca) + 100, color));
 	drawRects();
 }
@@ -1009,4 +1062,16 @@ if (imEraser) {
 
 if (reset) {
 	reset.addEventListener("click", eraserClick);
+}
+
+if (list1) {
+	list1.addEventListener("click", list1Click);
+}
+
+if (list2) {
+	list2.addEventListener("click", list2Click);
+}
+
+if (list3) {
+	list3.addEventListener("click", list3Click);
 }
